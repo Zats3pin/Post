@@ -7,6 +7,7 @@ public class WailService {
 
 
     private Post post = new Post.Builder().build();
+
     public void like(){
         final var likes = post.getLikes() + 1;
         post = post.builder()
@@ -24,9 +25,14 @@ public class WailService {
                 .build();
     }
 
-    public void setCoords(String lat, String Long){
+    public void setLat(final double lat){
         post = post.builder()
-                .set()
+                .setLat(lat)
+                .build();
+    }
+    public void setLong(final double Long){
+        post = post.builder()
+                .setLong(Long)
                 .build();
     }
 

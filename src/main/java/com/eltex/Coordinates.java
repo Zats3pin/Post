@@ -3,8 +3,8 @@ package com.eltex;
 public class Coordinates {
 
 
-    double lat;
-    double Long; //пишу с большой буквы, потому что Java воспринимает Long как тип данных
+    double lat = 1;
+    double Long = 1; //пишу с большой буквы, потому что Java воспринимает Long как тип данных
 
     public double getLat() {
         return lat;
@@ -18,7 +18,7 @@ public class Coordinates {
         this.lat = lat;
     }
 
-    public void setLong(double aLong) {
-        Long = aLong;
+    public void setLong(double Long) {
+        this.Long = Long;
     }
 }

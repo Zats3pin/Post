@@ -9,15 +9,20 @@ public class Main {
  //       System.out.print(post);
         Scanner in = new Scanner(System.in);
         String temp;
-
+        double tempDouble = 0;
 
 
         final var service = new WailService();
         System.out.println("Введите свои координаты по широте (lat)");
         temp = in.nextLine();
-        service.setCoords(temp,temp);
-        System.out.println("ведите свои координаты по долготе (long)");
+        tempDouble = Double.parseDouble(temp);
+        service.setLat(tempDouble);
+        System.out.println("Введите свои координаты по долготе (long)");
         temp = in.nextLine();
+        tempDouble = Double.parseDouble(temp);
+        service.setLong(tempDouble);
+
+
         System.out.println("Введите имя автора статьи");
         temp = in.nextLine();
         service.setAuthor(temp);

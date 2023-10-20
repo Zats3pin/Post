@@ -16,8 +16,8 @@ public class Post {
     String Link;
     boolean mentionedMe;
 
+    Coordinates coords = new Coordinates();
 
-    Coordinates coords;
 
 
 
@@ -156,7 +156,8 @@ public class Post {
                 .setAuthor(author)
                 .setContent(content)
                 .setLikes(likes)
-                .setCoords(coords);
+                .setLat(coords.lat)
+                .setLong(coords.Long);
 
     }
 
@@ -166,9 +167,9 @@ public class Post {
         private String author = "";
         private int likes = 0;
 
-        private double lat = 0;
-        private double Long = 0;
-         Coordinates coords;
+        private double lat = 1;
+        private double Long = 1;
+        Coordinates coords = new Coordinates();
 
 
 
@@ -189,11 +190,16 @@ public class Post {
             return this;
         }
 
-        public Builder setCoords( Coordinates coords) {
+        public Builder setLat( double lat) {
             this.coords.lat = lat;
+            return this;
+        }
+
+        public Builder setLong( double Long) {
             this.coords.Long = Long;
             return this;
         }
+
 
         // В финале вызываем build, чтобы получить результат
         public Post build() {
