@@ -1,3 +1,4 @@
+
 package com.eltex;
 
 import java.security.Provider;
@@ -10,22 +11,33 @@ public class Main {
         Scanner in = new Scanner(System.in);
         String temp;
         double tempDouble = 0;
+        int tempInt = 0;
 
 
         final var service = new WailService();
-        System.out.println("Введите свои координаты по широте (lat)");
-        temp = in.nextLine();
-        tempDouble = Double.parseDouble(temp);
-        service.setLat(tempDouble);
-        System.out.println("Введите свои координаты по долготе (long)");
-        temp = in.nextLine();
-        tempDouble = Double.parseDouble(temp);
-        service.setLong(tempDouble);
+
 
 
         System.out.println("Введите имя автора статьи");
         temp = in.nextLine();
         service.setAuthor(temp);
+
+        System.out.println("Введите ID автора статьи");
+        temp = in.nextLine();
+        tempInt = Integer.parseInt(temp);
+        service.setAuthorId(tempInt);
+
+        System.out.println("Введите работу(Job) автора статьи");
+        temp = in.nextLine();
+        service.setAuthorJob(temp);
+
+        System.out.println("Введите ссылку на аватар автора статьи");
+        temp = in.nextLine();
+        service.setAuthorAvatar(temp);
+
+
+
+
         System.out.println("Введите саму статью");
         temp = in.nextLine();
         service.setContent(temp);
@@ -44,13 +56,27 @@ public class Main {
             service.setUrl(temp);
         }
 
+        //service.setLink("https://" + service.getId()+ ".com");
+       // service.setPublished(String.valueOf(service.getDate()));
+        System.out.println("Введите свои координаты по широте (lat)");
+        temp = in.nextLine();
+        tempDouble = Double.parseDouble(temp);
+        service.setLat(tempDouble);
+
+        System.out.println("Введите свои координаты по долготе (long)");
+        temp = in.nextLine();
+        tempDouble = Double.parseDouble(temp);
+        service.setLong(tempDouble);
+
 
         System.out.println("Оценить свою статью? 0 - да, 1 - нет");
         temp = in.nextLine();
 
         if (temp.equals("0")) {
             service.like();
+            service.setLikesByMe(true);
         }
+
 
 
         System.out.println("информация о статье\n" + service.getPost()); // Post[content=, author=Anonymous, likes=1]

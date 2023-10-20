@@ -2,9 +2,9 @@ package com.eltex;
 
 public class Attachment {
 
-    String url = "";
+    String url = "null";
 
-    String type = "";
+    String type = "null";
 
     public void setUrl(String url) {
         this.url = url;

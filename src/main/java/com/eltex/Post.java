@@ -1,5 +1,8 @@
 package com.eltex;
 
+
+import java.util.Date;
+import java.util.Random;
 //import org.jetbrains.annotations.Nullable;
 
 public class Post {
@@ -9,12 +12,14 @@ public class Post {
     int id;
     int authorId;
     String author;
-    String autorJob;
-    String autorAvatar;
+    String authorJob;
+    String authorAvatar;
     String content;
     String published;
-    String Link;
+    String link;
     boolean mentionedMe;
+
+    boolean likesByMe;
 
     Coordinates coords = new Coordinates();
     Attachment attach  = new Attachment();
@@ -23,14 +28,24 @@ public class Post {
 
 
 
-    boolean likesByMe;
+
     public Post(String content, String author, int likes){
         this.content = content;
         this.author = author;
         this.likes = likes;
     }
 
-    public Post(String content, String author, int likes, double lat, double Long, String type, String url){
+
+
+
+
+    public Post(int id, int authorId, boolean mentionedMe, boolean likesByMe, String authorJob, String authorAvatar, String published, String link, String content, String author, int likes, double lat, double Long, String type, String url){
+        this.id = id;
+        this.authorId = authorId;
+        this.mentionedMe = mentionedMe;
+        this.likesByMe = likesByMe;
+        this.authorJob = authorJob;
+        this.authorAvatar = authorAvatar;
         this.content = content;
         this.author = author;
         this.likes = likes;
@@ -38,6 +53,8 @@ public class Post {
         this.coords.Long = Long;
         this.attach.type = type;
         this.attach.url = url;
+        this.link = link;
+        this.published = published;
     }
 
 ////////////////////////////////////////GETTER SETTER//////////////////////////////
@@ -62,12 +79,12 @@ public class Post {
         return author;
     }
 
-    public String getAutorJob() {
-        return autorJob;
+    public String getAuthorJob() {
+        return authorJob;
     }
 
-    public String getAutorAvatar() {
-        return autorAvatar;
+    public String getAuthorAvatar() {
+        return authorAvatar;
     }
 
     public String getContent() {
@@ -79,7 +96,7 @@ public class Post {
     }
 
     public String getLink() {
-        return Link;
+        return link;
     }
 
     public boolean isMentionedMe() {
@@ -98,12 +115,12 @@ public class Post {
         this.author = author;
     }
 
-    public void setAutorJob(String autorJob) {
-        this.autorJob = autorJob;
+    public void setAuthorJob(String autorJob) {
+        this.authorJob = autorJob;
     }
 
-    public void setAutorAvatar(String autorAvatar) {
-        this.autorAvatar = autorAvatar;
+    public void setAuthorAvatar(String autorAvatar) {
+        this.authorAvatar = autorAvatar;
     }
 
     public void setContent(String content) {
@@ -115,7 +132,7 @@ public class Post {
     }
 
     public void setLink(String link) {
-        Link = link;
+        link = link;
     }
 
     public void setMentionedMe(boolean mentionedMe) {
@@ -144,7 +161,23 @@ public class Post {
     @Override
     public String toString()
     {
-        return this.content + " - Статья \n " + this.author + " - Автор \n " + this.likes+ " - Кол-во лайков \n " + this.coords.lat+ " - Координаты(широта) \n " + this.coords.Long+ " - Координаты(долгота) \n " + this.attach.type+ " - Тип вложения \n " + this.attach.url + " - Ссылка на вложение \n ";
+        return  this.author + " - Автор \n " +
+                this.authorAvatar + " - Ссылка на аватар \n " +
+                this.authorId + " - id автора \n " +
+                this.authorId + " - Работа автора \n " +
+                this.link + " - Ссылка на статью \n " +
+                this.content + " - Статья \n " +
+                this.attach.type+ " - Тип вложения \n " +
+                this.attach.url + " - Ссылка на вложение \n "+
+                this.likes + " - Кол-во лайков \n " +
+                this.likesByMe +   " - Мой лайк \n " +
+                this.mentionedMe +   " - мой пост \n " +
+                this.id + " - id \n " +
+                this.published  + " - время публикации \n "+
+                this.coords.lat+ " - Координаты(широта) \n " +
+                this.coords.Long+ " - Координаты(долгота) \n ";
+
+
     }
 
 
@@ -155,25 +188,67 @@ public class Post {
 
     public Builder builder(){
         return new Builder()
+
                 .setAuthor(author)
                 .setContent(content)
                 .setLikes(likes)
                 .setLat(coords.lat)
                 .setLong(coords.Long)
                 .setType(attach.type)
-                .setUrl(attach.url);
-
+                .setUrl(attach.url)
+                .setId(id)
+                .setAuthorId(authorId)
+                .setMentionedMe(mentionedMe)
+                .setLikesByMe(likesByMe)
+                .setAuthorJob(authorJob)
+                .setAuthorAvatar(authorAvatar)
+                .setPublished(published)
+                .setLink(link);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     static class Builder {
+        Date date = new Date();
+
         // Обязательно указываем начальные значения полей
         private String content = "";
         private String author = "";
         private int likes = 0;
+        private int id = 1 + (int)(Math.random() * ((10000 - 1) + 1));
+        private int authorId = 0;
+        private String authorJob = "";
+        private String authorAvatar = "";
+        private String published = String.valueOf(date);
+        private String link = "https://" + id + ".com";
+        private boolean mentionedMe = true;
+        private  boolean likesByMe = false;
+
+
 
         Coordinates coords = new Coordinates();
         Attachment attach = new Attachment();
-
 
 
 
@@ -213,12 +288,52 @@ public class Post {
             return this;
         }
 
+        public Builder setId( int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setAuthorId( int authorId) {
+            this.authorId = authorId;
+            return this;
+        }
+
+        public Builder setMentionedMe( boolean mentionedMe) {
+            this.mentionedMe = mentionedMe;
+            return this;
+        }
+        public Builder setLikesByMe( boolean likesByMe) {
+            this.likesByMe = likesByMe;
+            return this;
+        }
+
+        public Builder setAuthorJob( String authorJob) {
+            this.authorJob = authorJob;
+            return this;
+        }
+
+        public Builder setAuthorAvatar( String authorAvatar) {
+            this.authorAvatar = authorAvatar;
+            return this;
+        }
+
+        public Builder setPublished( String published) {
+            this.published = published;
+            return this;
+        }
+
+        public Builder setLink( String Link) {
+            this.link = link;
+            return this;
+        }
+
+
 
 
 
         // В финале вызываем build, чтобы получить результат
         public Post build() {
-            return new Post(content, author, likes, coords.lat, coords.Long,attach.type,attach.url);
+            return new Post(id, authorId, mentionedMe, likesByMe, authorJob, authorAvatar, published, link, content, author, likes, coords.lat, coords.Long,attach.type,attach.url);
         }
 
     }

@@ -1,5 +1,5 @@
 package com.eltex;
-
+import java.util.Date;
 public class WailService {
 
 
@@ -14,6 +14,10 @@ public class WailService {
                 .setLikes(likes)
                 .build();
     }
+
+
+
+
     public void setContent(final String content){
         post = post.builder()
                 .setContent(content)
@@ -47,9 +51,64 @@ public class WailService {
                 .build();
     }
 
+    public void setId(final int id){
+        post = post.builder()
+                .setId(id)
+                .build();
+    }
+
+    public void setAuthorId(final int authorId){
+        post = post.builder()
+                .setAuthorId(authorId)
+                .build();
+    }
+
+    public void setMentionedMe(final boolean mentionedMe){
+        post = post.builder()
+                .setMentionedMe(mentionedMe)
+                .build();
+    }
+
+    public void setLikesByMe(final boolean likesByMe){
+        post = post.builder()
+                .setLikesByMe(likesByMe)
+                .build();
+    }
+
+    public void setAuthorJob(final String authorJob){
+        post = post.builder()
+                .setAuthorJob(authorJob)
+                .build();
+    }
+
+    public void setAuthorAvatar(final String authorAvatar){
+        post = post.builder()
+                .setAuthorAvatar(authorAvatar)
+                .build();
+    }
+
+    public void setPublished(final String published){
+        post = post.builder()
+                .setPublished(published)
+                .build();
+    }
+
+    public void setLink(final String link){
+        post = post.builder()
+                .setLink(link)
+                .build();
+    }
+
+
+
     public Post getPost(){
         return post;
     }
+
+    public int getId(){
+        return post.getId();
+    }
+
 
 
 
