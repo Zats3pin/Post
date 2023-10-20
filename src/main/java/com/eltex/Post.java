@@ -1,5 +1,7 @@
 package com.eltex;
 
+//import org.jetbrains.annotations.Nullable;
+
 public class Post {
 
 
@@ -15,6 +17,11 @@ public class Post {
     boolean mentionedMe;
 
 
+    Coordinates coords;
+
+
+
+
 
     boolean likesByMe;
     public Post(String content, String author, int likes){
@@ -23,7 +30,15 @@ public class Post {
         this.likes = likes;
     }
 
+    public Post(String content, String author, int likes, double lat, double Long){
+        this.content = content;
+        this.author = author;
+        this.likes = likes;
+        this.coords.lat = lat;
+        this.coords.Long = Long;
+    }
 
+////////////////////////////////////////GETTER SETTER//////////////////////////////
 
     public void setLikes(int likes) {
         this.likes = likes;
@@ -105,6 +120,17 @@ public class Post {
         this.mentionedMe = mentionedMe;
     }
 
+    public Coordinates getCoords() {
+        return coords;
+    }
+
+    public void setCoords(Coordinates coords) {
+        this.coords = coords;
+    }
+
+
+
+
     public boolean isLikesByMe() {
         return likesByMe;
     }
@@ -116,15 +142,22 @@ public class Post {
     @Override
     public String toString()
     {
-        return this.content + " " + this.author + " " + this.likes;
+        return this.content + " " + this.author + " " + this.likes+ " " + this.coords.lat+ " " + this.coords.Long;
     }
+
+
+
+
+
 
 
     public Builder builder(){
         return new Builder()
                 .setAuthor(author)
                 .setContent(content)
-                .setLikes(likes);
+                .setLikes(likes)
+                .setCoords(coords);
+
     }
 
     static class Builder {
@@ -132,6 +165,13 @@ public class Post {
         private String content = "";
         private String author = "";
         private int likes = 0;
+
+        private double lat = 0;
+        private double Long = 0;
+        private  Coordinates coords;
+
+
+
 
         // Каждый метод строителя запоминает данные и возвращает сам себя
         public Builder setContent( String content) {
@@ -149,9 +189,15 @@ public class Post {
             return this;
         }
 
+        public Builder setCoords( Coordinates coords) {
+            this.coords.lat = lat;
+            this.coords.Long = Long;
+            return this;
+        }
+
         // В финале вызываем build, чтобы получить результат
         public Post build() {
-            return new Post(content, author, likes);
+            return new Post(content, author, likes, coords.lat, coords.Long);
         }
 
     }
