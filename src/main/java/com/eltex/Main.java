@@ -13,6 +13,11 @@ public class Main {
 
 
         final var service = new WailService();
+        System.out.println("Введите свои координаты по широте (lat)");
+        temp = in.nextLine();
+        service.setCoords(temp,temp);
+        System.out.println("ведите свои координаты по долготе (long)");
+        temp = in.nextLine();
         System.out.println("Введите имя автора статьи");
         temp = in.nextLine();
         service.setAuthor(temp);
@@ -21,6 +26,7 @@ public class Main {
         service.setContent(temp);
         System.out.println("Оценить свою статью? 0 - да, 1 - нет");
         temp = in.nextLine();
+
         if (temp.equals("0")) {
             service.like();
         }

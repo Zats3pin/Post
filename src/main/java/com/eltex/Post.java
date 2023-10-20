@@ -168,7 +168,7 @@ public class Post {
 
         private double lat = 0;
         private double Long = 0;
-        private  Coordinates coords;
+         Coordinates coords;
 
 
 

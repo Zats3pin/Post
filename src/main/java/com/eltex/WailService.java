@@ -23,6 +23,13 @@ public class WailService {
                 .setAuthor(author)
                 .build();
     }
+
+    public void setCoords(String lat, String Long){
+        post = post.builder()
+                .set()
+                .build();
+    }
+
     public Post getPost(){
         return post;
     }
