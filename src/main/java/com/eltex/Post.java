@@ -17,7 +17,7 @@ public class Post {
     boolean mentionedMe;
 
     Coordinates coords = new Coordinates();
-
+    Attachment attach  = new Attachment();
 
 
 
@@ -30,12 +30,14 @@ public class Post {
         this.likes = likes;
     }
 
-    public Post(String content, String author, int likes, double lat, double Long){
+    public Post(String content, String author, int likes, double lat, double Long, String type, String url){
         this.content = content;
         this.author = author;
         this.likes = likes;
         this.coords.lat = lat;
         this.coords.Long = Long;
+        this.attach.type = type;
+        this.attach.url = url;
     }
 
 ////////////////////////////////////////GETTER SETTER//////////////////////////////
@@ -142,7 +144,7 @@ public class Post {
     @Override
     public String toString()
     {
-        return this.content + " " + this.author + " " + this.likes+ " " + this.coords.lat+ " " + this.coords.Long;
+        return this.content + " - Статья \n " + this.author + " - Автор \n " + this.likes+ " - Кол-во лайков \n " + this.coords.lat+ " - Координаты(широта) \n " + this.coords.Long+ " - Координаты(долгота) \n " + this.attach.type+ " - Тип вложения \n " + this.attach.url + " - Ссылка на вложение \n ";
     }
 
 
@@ -157,7 +159,9 @@ public class Post {
                 .setContent(content)
                 .setLikes(likes)
                 .setLat(coords.lat)
-                .setLong(coords.Long);
+                .setLong(coords.Long)
+                .setType(attach.type)
+                .setUrl(attach.url);
 
     }
 
@@ -167,9 +171,8 @@ public class Post {
         private String author = "";
         private int likes = 0;
 
-        private double lat = 1;
-        private double Long = 1;
         Coordinates coords = new Coordinates();
+        Attachment attach = new Attachment();
 
 
 
@@ -200,10 +203,22 @@ public class Post {
             return this;
         }
 
+        public Builder setType( String type) {
+            this.attach.type = type;
+            return this;
+        }
+
+        public Builder setUrl( String url) {
+            this.attach.url = url;
+            return this;
+        }
+
+
+
 
         // В финале вызываем build, чтобы получить результат
         public Post build() {
-            return new Post(content, author, likes, coords.lat, coords.Long);
+            return new Post(content, author, likes, coords.lat, coords.Long,attach.type,attach.url);
         }
 
     }

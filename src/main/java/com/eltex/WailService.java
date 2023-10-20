@@ -36,6 +36,17 @@ public class WailService {
                 .build();
     }
 
+    public void setType(final String type){
+        post = post.builder()
+                .setType(type)
+                .build();
+    }
+    public void setUrl(final String url){
+        post = post.builder()
+                .setUrl(url)
+                .build();
+    }
+
     public Post getPost(){
         return post;
     }
